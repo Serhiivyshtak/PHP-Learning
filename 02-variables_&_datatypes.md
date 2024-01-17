@@ -208,7 +208,7 @@ $string = "random string";
 echo get_defined_vars(); // returns an array with all variables defined, in our situation $string only
 ```
 
-You may notice, that some of the values, like null and false, return always nothing. It happens because by the inputing variables with those values, interpreter automaticaly makes the strings out of them. And string out of false and null is actually nothing. If you ant to have an ability to see whole output of such variables use var_dump() function:
+You may notice, that some of the values, like null and false, return always nothing. It happens because by the inputing variables with those values, interpreter automaticaly makes the strings out of them. And string out of false and null is actually nothing. If you want to have an ability to see whole output of such variables use var_dump() function:
 
 ***var_dump():***
 ```php
