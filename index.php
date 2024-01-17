@@ -1,10 +1,6 @@
 <?php
 
 
-echo PHP_INT_MIN;
-
-
-
-
+echo is_infinite(log(0)); // it returns 1 (true)
 
 

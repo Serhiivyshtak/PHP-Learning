@@ -7,6 +7,10 @@ A valid constant name starts with a letter or underscore and can potentily conta
 
 Unlike variables, constants are authomatically global.
 
+## when to use constants?
+
+You should use constants, if you know that a value will never be chaged. This is done in order to ensure confidence in your code. 
+
 
 ## How to ctreate a constant?
 
