@@ -115,7 +115,11 @@ echo is_finite(2000); // it returns 1 (true)
 echo is_infinite(log(0)); // it returns 1 (true)
 ```
 
-
+***number_format()***, it is a function, which allows to format numbers. First argument is a number to format, second - digits after point, third - decimal separator and fourth - thousend separator:
+```php
+$huge_number = 121341212.8979879;
+echo number_format($huge_number, 2, ".", ","); // it returns a string "121,341,212.90"
+```
 ___
 Link to the w3school reference about numbers you will find 
 <a href="https://www.w3schools.com/php/php_ref_math.asp">here</a>.

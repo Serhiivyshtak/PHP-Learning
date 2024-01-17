@@ -1,6 +1,10 @@
 <?php
 
 
-echo is_infinite(log(0)); // it returns 1 (true)
 
+$str = "Hello, 
+my name is Serhii and 
+I am a beginner 
+PHP developer";
 
+echo $str;
