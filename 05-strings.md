@@ -103,7 +103,7 @@ echo str_pad($str1, 20, ".", STR_PAD_RIGHT); // it will pad such amount of dots 
 // Insted of STR_PAD_RIGHT, it also could be STR_PAD_LEFT and STR_PAD_BOTH
 ```
 
-***nl2br(),***appending our string to HTML page, whole text will be written as a single-line text, even if this text contains line brakes in our code in PHP. If we want to show exactly tha same text with line breaks, use this method. It replaces all the new lines to br HTML tag:
+***nl2br()***, appending our string to HTML page, whole text will be written as a single-line text, even if this text contains line brakes in our code in PHP. If we want to show exactly tha same text with line breaks, use this method. It replaces all the new lines to br HTML tag:
 ```php
 $str = "Hello, 
 my name is Serhii and 
@@ -112,4 +112,22 @@ PHP developer";
 
 echo $str; // output to the HTML page will be as a single-line text
 echo nl2br($str); // output will be written exactly the same as the variable $str
+```
+
+***explode(), implode(), str_split(), join()***, are the functions to transform a string into an array and conversely:
+```php
+$str = "random string, random value";
+$arr = ["hello", "my", "dear", "friend"];
+var_dump(explode(" ", $str)); // this method splits a string by separetor and returns an array: [0]=> string(6)"random"[1]=> string(7)"string," [2]=> string(6)"random" [3]=> string(5)"value". Separator can't be empty
+
+var_dump(explode(",", $str)); // in this case separator is ",", that is why it returns [0]=> string(13)"random string [1]=> string(13)" random value"
+
+var_dump(str_split($str, 1)); // str_split() is the alternative to explode() function and it works a bit different. It cuts string not by given separator, but it cuts the string for chuncs, length of wich we type as a second argument (in our case it is 1). It returns a huge array with every letter as separate item of it: ["r", "a", "n", "d", "o", "m" (and so on...)]
+
+var_dump(join($arr, " ")); // it appends each array item to th string and pastes a separator: "hello my dear friend"
+var_dump(join($arr, "/")); // returns "hello/my/dear/friend"
+
+var_dump(implode($arr, " ")); // works absolutely the same way as join() method and returns "hello my dear friend"
+var_dump(implode($arr, "/")); // returns "hello/my/dear/friend"
+
 ```
