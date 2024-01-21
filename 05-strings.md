@@ -131,3 +131,8 @@ var_dump(implode($arr, " ")); // works absolutely the same way as join() method 
 var_dump(implode($arr, "/")); // returns "hello/my/dear/friend"
 
 ```
+
+
+___
+Link to the w3school reference about numbers you will find 
+<a href="https://www.w3schools.com/php/php_ref_string.asp">here</a>.

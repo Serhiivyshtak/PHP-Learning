@@ -299,3 +299,7 @@ var_dump(array_values($person)); // it returns ["Serhii", 17, "Kyiw"]
 - <a href="#extract">array_extract($array)</a> - extracts key-value pairs and creates global scoping variables out of them;
 
 
+___
+Link to the w3school reference about numbers you will find 
+<a href="https://www.w3schools.com/php/php_ref_array.asp">here</a>.
+
