@@ -75,7 +75,7 @@ echo sqrt(-9); // returns NAN, because it is imposible to get a square root out 
 
 **min(), max():**
 ```php
-echo max (-2, -4, 6.4, 8.1, 10); // it returns the greatest value of range, in our situation 10
+echo max(-2, -4, 6.4, 8.1, 10); // it returns the greatest value of range, in our situation 10
 echo min(-2, -4, 6.4, 8.1, 10); // it returns the smallest value of range, in our situation -4
 ```
 
