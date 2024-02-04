@@ -198,6 +198,108 @@ echo strval($boolean_false_value); // it returns nothing
 Casting operators give the same result as casting functions, so there is no need to explain it additionally.
 
 
+## Variables scope?
+
+The scope of a variable is the context where it was defined. In PHP there are three types of scope:
+- global (if variable was defined out of any function);
+- local (if wariable was defined inside of any function);
+- static (almost same as local but a bit different);
+
+***Global scope:***
+```php
+$global_variable = 16;
+
+function root () {
+    echo sqrt($global_variable);
+}
+
+root(); // it will not work, because $global_variable has global scope
+```
+
+As you see in previous example, even if variable defined outside any function, it is not accessible everywhere. To access any global variable from a function, you need to keep it as a parameter, or use *global* keyword:
+
+```php
+
+$global_variable = 16;
+
+function root ($num) {
+    echo sqrt($num);
+}
+
+root($global_variable); // now it works and outputs 4
+```
+or
+```php
+$global_variable = 16;
+
+function root () {
+    global $global_variable;
+    echo sqrt($global_variable);
+}
+
+root(); // now it works and outputs 4
+```
+
+***Local scope:***
+
+```php
+function calculate_area ($radius) {
+    $pi = 3.14; // local variable
+    echo $area = $pi * pow($radius, 2);
+}
+
+calculate_area(12); // this function is absolutely valid and outputs 452.16
+```
+In situation above we have a variable *$pi*, which was defined inside of function *calculate_area*. That means, we can not access it outside this function.
+
+***static scope:***
+Static scope is a unique type of scope, because it has a special ability to remember all changes to the value in function. What doe's it mean? Let's see an example:
+```php
+$random_int = 7;
+
+function inc () {
+    global $random_int;
+    $value = 1;
+    echo $random_int + $value;
+    $value++;
+}
+
+inc(); // returns 8
+```
+Function *inc()* increments a global variable *\$random_int* and as expected returns 8. At the end of the function we increment *\$value* itself, so we expect, that by multiplay calling of this function, we will get outputs every time greather by one. But it won't:
+```php
+$random_int = 7;
+
+function inc () {
+    global $random_int;
+    $value = 1;
+    echo $random_int + $value;
+    $value++;
+}
+
+inc(); // returns 8
+inc(); // returns 8
+inc(); // returns 8
+inc(); // returns 8
+```
+It happens becaues this variable isn't static and it doesn't remember all changes that hav been made to it. Wht will happen, if we use *static* keyword:
+```php
+$random_int = 7;
+
+function inc () {
+    global $random_int;
+    static $value = 1;
+    echo $random_int + $value;
+    $value++;
+}
+
+inc(); // returns 8
+inc(); // returns 9
+inc(); // returns 10
+inc(); // returns 11
+```
+Now we see, that *$value* isn't 1 anymore. It changes every time we call *inc()* function.
+
 ## What is important else?
 
 Below you will find a few more useful functions to handle variables:
