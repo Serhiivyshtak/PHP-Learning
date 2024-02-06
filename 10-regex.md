@@ -4,7 +4,7 @@ Regular expression is a sequence of characters that allows you to search for any
 
 In PHP it is often used for checking and validating of forms inputs of user.
 
-# Basic interaction with regular expressions in PHP?
+## Basic interaction with regular expressions in PHP?
 
 Regex must be consisting of quotes and to forward slashes. The most easy thing we can do with it is, to search for certain value in a string. ***preg_match()*** allows to do us it in PHP:
 ```php

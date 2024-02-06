@@ -24,7 +24,7 @@ $array = array("random string", 123, true);
 
 
 ## How to find out datatype of variable?
-There are a few methos, like *gettype(), is_null(), is_string(), is_bool(), is_double(), is_float(), is_int(), is_integer(), is_long(), is_numeric(),is_array(), is_object(), is_sclar()*  to check the datatype.
+There are a few methos, like *gettype(), is_null(), is_string(), is_bool(), is_double(), is_float(), is_int(), is_integer(), is_long(), is_numeric(),is_array(), is_object(), is_scalar()*  to check the datatype.
 
 ***gettype():***
 ```php
@@ -106,16 +106,16 @@ echo is_array($array_2); // returns 1 (true)
 echo is_array($non_array); // returns nothing (false)
 ```
 
-***issclar()***, checks if a value is weather a number, float or a string:
+***isscalar()***, checks if a value is weather a number, float or a string:
 ```php
 $string = "random string";
 $number = 123;
 $float = 1.2;
 $array = [123, "random string", true];
-echo is_sclar($string); // it returns 1 (true)
-echo is_sclar($number); // it returns 1 (true)
-echo is_sclar($float); // it returns 1 (true)
-echo is_sclar($array); // it returns nothing (false)
+echo is_scalar($string); // it returns 1 (true)
+echo is_scalar($number); // it returns 1 (true)
+echo is_scalar($float); // it returns 1 (true)
+echo is_scalar($array); // it returns nothing (false)
 
 ```
 
@@ -282,7 +282,7 @@ inc(); // returns 8
 inc(); // returns 8
 inc(); // returns 8
 ```
-It happens becaues this variable isn't static and it doesn't remember all changes that hav been made to it. Wht will happen, if we use *static* keyword:
+It happens becaues this variable isn't static and it doesn't remember all changes that have been made to it. What will happen, if we use *static* keyword:
 ```php
 $random_int = 7;
 
