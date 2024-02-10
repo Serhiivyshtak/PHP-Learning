@@ -140,15 +140,92 @@ INSERT INTO comments (comment_text, users_id) VALUES ('It is absolutely awesome!
 As a result we will become a new row inside of *comments*. But not just normal one. It is related to *users* table and we can see it by hovering users_id field:
 <a href="https://drive.google.com/file/d/1uMgOZsN1JQt9fcNJL0bhJsbu1O8186yK/view?usp=sharing">see video</a>
 
+If we will try to append a row to the *comment* table with an not-exicting *users_id* from *users* table, it will output us an error:
+```sql
+INSERT INTO comments (comment_text, users_id) VALUES ('What a beautiful video', 10); -- 10 is not exicting user id in the users table
+```
+Result:
+<img src="assets/screenshot_for_php_docs_10.jpg"/>
+
 ## Selecting data and joins?
 
+Until now we have leraned how to create tables and databases, how to insert, deleate, update data inside tables and how to build reletionships between multiple tables with help of *FOREIGN KEY*. One more big part that we need to learn is, how to select data from table if we want for example to show it on our web page or in an application. In this part of the article we will cover this topic.
+
+We need to fill our two tables *users* and *comments* with data to manipulate with it. SQL has no such algorithm as any programming language to do it with just one block of code (loop). So we need to do it manualy by repeating *INSERT INTO* as many times as we want. 
+
+We have following two tables:
+*users*:
+<img src="assets/screenshot_for_php_docs_12.jpg"/>
 
 
+And *comments*:
+<img src="assets/screenshot_for_php_docs_11.jpg"/>
+
+First of all, let's try to select all data from *users* table. We need ***SELECT FROM*** statement for it:
+```sql
+SELECT * FROM users; -- '*' sign represents all data
+```
+And as th output we just will recieve *users* table itself.
+
+What if we want to select a special row, for example with username of Lukash006:
+```sql
+  SELECT * FROM users WHERE username = 'Lukash006';
+```
+Following result will be shown:
+<img src="assets/screenshot_for_php_docs_13.jpg"/>
+
+We can also specify which column we want to grab. Just write a name of column instead of * after *SELECT* keyword:
+```sql
+SELECT username FROM users WHERE username = 'Lukash006';
+```
+Only one value will be shown:
+<img src="assets/screenshot_for_php_docs_14.jpg"/>
+
+How you already understand, after *SELECT* keyword we specify which column we want to grab and after *WHERE* keyword we write a 'filter', which tells SQL which row we want to grab.
+
+***JOIN***  keyword is a reason, why we need two tables with data in this chapter. It allows us two select multiply tables joined to each other by a special column. There a few types of joins as ***INNER JOIN***, ***LEFT JOIN*** and ***RIGHT JOIN***. First of all let's have a look, how do we use *INNER JOIN*:
+
+```sql
+SELECT * FROM users INNER JOIN comments ON users.id = comments.users_id;
+```
+This line of code selects all rows from *users*, all rows from *comments* and joins those rows together, which has id = users_id:
+<img src="assets/screenshot_for_php_docs_15.jpg"/>
+
+As we see, in this output we see no users, that are haven't written a comment. Thay wasn't grabbed. It is a feature of *INNER JOIN*. It doesn't grab rows, which have no matches.
+
+But what grabes the rows even without matches is *LEFT JOIN* and *RIGHT JOIN*. By specifying right or left, we tell SQL which part of joined table will be main. If we specify it as *LEFT JOIN*, all values from left table will be grabbed (in our case users). If the user have not written a single comment, right part of the row will be filled with NULLs:
+```sql
+SELECT * FROM users LEFT JOIN comments ON users.id = comments.users_id;
+```
+<img src="assets/screenshot_for_php_docs_16.jpg"/>
+
+## How to change a structure of exicting table?
+
+As last thing, we will see, how to change the structure of already exicting table after we created it with help of *CREATE TABLE*. 
+
+Very often we need to add a new column or to deleate an exicting one, to change the datatype or size. For this all tasks is ***ALTER*** keyword siutable.
+
+Here how we can add a new column:
+```sql
+ALTER TABLE users ADD COLUMN sex CHAR NOT NULL;
+```
+Result:
+<img src="assets/screenshot_for_php_docs_17.jpg"/>
+
+To delete any column use following expression:
+```sql
+ALTER TABLE users DROP COLUMN sex;
+```
+As result we will get same table, as before adding column *sex*.
+
+To change datatype or size of a column we can also use *ALTER*:
+```sql
+ALTER TABLE users ALTER COLUMN pwd VARCHAR(200);
+```
+Now the size of *pwd* column in *users* is 200 characters, and not 255, like we defined it at very beginning.
 
 
+___
 
+Link to the w3school tutorial about sql you will find <a href="https://www.w3schools.com/sql/">here</a>.
 
-colors used:
-red - ff0000;
-blue - 2600ff;
-yellow - ffce00;
