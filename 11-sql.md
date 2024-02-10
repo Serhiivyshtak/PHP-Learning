@@ -50,6 +50,9 @@ Every SQL table consists of columns, which we have to name and also to give them
     - ***YEAR*** - Coan only store four-digit value from 1901 to 2155, and 0000;
     - ***TIMESTAMP*** - for stroing number of seconds since 1970-01-01 00:00:00 UTC. To set it authomaticaly, we can use DEFAULT CURRENT_TIMESTAMP in the column definition; 
 
+Even thought *CHAR* datatype can store up to 255 characters, it is recomennded to use it only for fixed amount of characters as for example gender - M or W, Country abbreviation - UA, EN, DE and so on. It is because if we specify length of CHAR as 30, but put inside a textual value
+with only length of 10, this value will be right padded with spaces, like this: 'text value<span style="color: transparent">....................</span>'. So for usernames and passwords it is better to use *VARCHAR*, even if it is under of 255 characters.
+
 ## Column definition?
 
 We saw how to create a table with help of *CREATE TABLE* already. After writing such an expression, we will get absolutely empty table without even named columns. We can define column's names and datatypes immidiately by creation, and here how it looks like:
@@ -60,9 +63,9 @@ First off all we create a new database called *my_first_db*, and than append a t
 ```sql
 CREATE TABLE users (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username CHAR(30) NOT NULL,
-    email CHAR(100) NOT NULL,
-    pwd CHAR(255) NOT NULL,
+    username VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    pwd VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
@@ -79,7 +82,7 @@ In this example we have created five columns: id, username, email, pwd and creat
 
 ## Signed and unsigned keywords?
 
-***SIGNED*** and ***UNSIGNED*** keywords are coming, when we use numeric datatypes. By default all numeric datatypes can contain positive numbers and negative as well, so we have a certain limit of numbers, which we can store in an datatbase item (For example -2147483648 to 2147483647 for *INT* datatype). By default every numeric datatype uses SIGNED property so it can contain positives ans negatives. But we can also set it to UNSIGN if we need to, and the range we will be able to store inside this database item will be only positive and two times greather than it was (Not -2147483648 to 2147483647 for *INT*, but 0 to 4 294 967 295). It happens, because in SQL we have a certain amount of bites we can store inside each datatype, and by using UNSIGNED keyword we free all bites, which were for negative numbers and give them to positive ones.
+***SIGNED*** and ***UNSIGNED*** keywords are coming, when we use numeric datatypes. By default all numeric datatypes can contain positive numbers and negative as well, so we have a certain limit of numbers, which we can store in an datatbase item (For example -2147483648 to 2147483647 for *INT* datatype). By default every numeric datatype uses SIGNED property so it can contain positives and negatives. But we can also set it to UNSIGN if we need to, and the range we will be able to store inside this database item will be only positive and two times greather than it was (Not -2147483648 to 2147483647 for *INT*, but 0 to 4 294 967 295). It happens, because in SQL we have a certain amount of bites we can store inside each datatype, and by using UNSIGNED keyword we free all bites, which were for negative numbers and give them to positive ones.
 
 ## How to insert, update and deleate data?
 
@@ -87,7 +90,7 @@ To perform a functionality of all keywords in this part of article, we will use 
 
 For inserting data we can use ***INSERT INTO*** statament.
 ```sql
-INSERT INTO users (username, email, pwd) VALUES ('SERHII', 'random@gmail.com', '123321');
+INSERT INTO users (username, email, pwd) VALUES ('SERHII', 'random@gmail.com', '123321');  
 ```
 
 And here how it looks like:
@@ -114,6 +117,33 @@ DELETE FROM users WHERE username = "SERHII"
 ```
 In this example we address not to id, but to username, to deleate a row, which we do not need anymore.
 <img src="assets/screenshot_for_php_docs_8.jpg"/>
+
+## Foreign key?
+
+Let's imagine, that we are creating a website, where users have ability to sign up and inside of table *users* we collect all of them. It would be also nice, if signed up users could leave a comment. So let's create a new table called *comments*:
+```sql
+CREATE TABLE comments (
+	  comment_id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    comment_text VARCHAR(500) NOT NULL,
+    commented_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    users_id INT(11) NOT NULL,
+    FOREIGN KEY (users_id) REFERENCES users(id)
+);
+```
+We have used an unknown for us keyword *FOREIGN KEY*, but for now let's just have a look to the table:
+<img src="assets/screenshot_for_php_docs_9.jpg"/>
+
+Nothing special jet, just normal table. But what if we put a new row inside of it with a new comment:
+```sql
+INSERT INTO comments (comment_text, users_id) VALUES ('It is absolutely awesome!', 2);
+```
+As a result we will become a new row inside of *comments*. But not just normal one. It is related to *users* table and we can see it by hovering users_id field:
+<a href="https://drive.google.com/file/d/1uMgOZsN1JQt9fcNJL0bhJsbu1O8186yK/view?usp=sharing">see video</a>
+
+## Selecting data and joins?
+
+
+
 
 
 
