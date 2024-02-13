@@ -145,4 +145,97 @@ $sql_query = "CREATE TABLE test_table (
 $connection->query($sql_query); // result will be the same
 ```
 
+Let's try to append new data to this table:
+```php
+$sql_append_data_query = "INSERT INTO test_table (test_field) VALUE ('Some random text to chek if everything is fine')";
+
+$connection->query($sql_append_data_query);
+```
+Result:
+<img src="assets/screenshot_for_php_docs_19.jpg"/>
+
+## How to fetch data from database?
+
+If we want to fetch a single item from our database, use ***mysqli_fetch_array()*** function. We need to use query for it:
+```php
+$host = "localhost";
+$db_username = "root";
+$db_password = "";
+$db_name = "my_first_db";
+
+$connection = mysqli_connect($host, $db_username, $db_password, $db_name);
+
+$sql_query = "SELECT * FROM users WHERE id = 3"; // query for reciving ONLY ONE user
+
+$response = mysqli_query($connection, $sql_query);
+
+$data = mysqli_fetch_array($response, MYSQLI_ASSOC); // Here as a second parameter we can specify wich array we want to get - either associative or numeric. MYSQLI_ASSOC for associative, MYSQLI_NUM for numeric
+
+/* As a result we recive associative array from our database created on 11.sql chapter:
+array(5) {
+  ["id"]=>
+  string(1) "3"
+  ["username"]=>
+  string(9) "Sasha3998"
+  ["email"]=>
+  string(15) "Sasha@gmail.com"
+  ["pwd"]=>
+  string(10) "78ghdusfhs"
+  ["created_at"]=>
+  string(19) "2024-02-09 10:35:32"
+} */
+```
+
+Here how we can do it using object oriented approach:
+```php
+$host = "localhost";
+$db_username = "root";
+$db_password = "";
+$db_name = "my_first_db";
+
+$connection = new mysqli($host, $db_username, $db_password, $db_name);
+
+$sql_query = "SELECT * FROM users WHERE id = 3";
+
+$response = $connection->query($sql_query);
+
+$data = $response->fetch_array(MYSQLI_NUM); // This time we are fetching numeric array
+
+// result will be the same, exept type of array
+```
+
+If we want to fetch multiple rows from a table, use ***mysqli_fetch_all()***:
+```php
+$host = "localhost";
+$db_username = "root";
+$db_password = "";
+$db_name = "my_first_db";
+
+$connection = mysqli_connect($host, $db_username, $db_password, $db_name);
+
+$sql_query = "SELECT * FROM users WHERE id > 5"; // query for reciving MULTIPLE users
+
+$response = mysqli_query($connection, $sql_query);
+
+$data = mysqli_fetch_all(MYSQLI_ASSOC); // we will recive all users with id greather than 5 in an associative array.
+```
+And as usual, same code but for OOP:
+```php
+$host = "localhost";
+$db_username = "root";
+$db_password = "";
+$db_name = "my_first_db";
+
+$connection = new mysqli($host, $db_username, $db_password, $db_name);
+
+$sql_query = "SELECT * FROM users WHERE id > 5";
+
+$response = $connection->query($sql_query);
+
+$data = $response->fetch_all(MYSQLI_NUM);
+```
+
+
+
+
 

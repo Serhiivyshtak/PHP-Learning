@@ -1,17 +1,20 @@
 <?php
 
 
+$host = "localhost";
+$db_username = "root";
+$db_password = "";
+$db_name = "my_first_db";
 
-$random_int = 7;
+$connection = new mysqli($host, $db_username, $db_password, $db_name);
 
-function inc () {
-    global $random_int;
-    static $value = 1;
-    echo $random_int + $value . "<br>";
-    $value++;
-}
+$sql_query = "SELECT * FROM users WHERE id > 5";
 
-inc();
-inc();
-inc();
-inc();
+$response = $connection->query($sql_query);
+
+$data = $response->fetch_all(MYSQLI_NUM);
+
+echo "<pre>";
+var_dump($data);
+echo "</pre>";
+
